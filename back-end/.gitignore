@@ -1,0 +1,9 @@
+/dist
+/node_modules
+
+# IDE - VSCode
+.history/*
+
+# System Files
+.DS_Store
+Thumbs.db
