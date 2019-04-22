@@ -6,11 +6,15 @@ import { Customer } from '../models/customer.model';
 import { Result } from 'src/core/result.model';
 import { CreateCustomerDto } from '../dtos/create-customer.dto';
 import { User } from '../models/user.model';
+import { CustomerService } from '../services/customer.service';
 
 @Controller('v1/customers')
 export class CustomerController {
     
-    constructor(private readonly accountService: AccountService){}
+    constructor(
+        private readonly accountService: AccountService,
+        private readonly customerService: CustomerService
+    ){}
     
     @Get()
     getAll() {
@@ -29,7 +33,11 @@ export class CustomerController {
             const userCreated = await this.accountService.create(
                 new User(body.document, body.password, true)
             );
-            return new Result('Cliente criado com sucesso', true, userCreated, null);
+            const customer = await this.customerService.create(
+                new Customer(body.name, body.document, body.email, null, null, null, null, userCreated)
+            );
+            
+            return new Result('Cliente criado com sucesso', true, customer, null);
         }
         catch(err){
             console.error(err);
