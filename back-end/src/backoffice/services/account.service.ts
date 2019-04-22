@@ -9,6 +9,6 @@ export class AccountService {
 
     create(data: User) {
         const user = new this.model(data);
-        user.save();
+        return user.save();
     }
 }

@@ -11,7 +11,7 @@ export class CreateCustomerContract implements Contract {
     validate(model: CreateCustomerDto): boolean {
         const flunt = new Flunt();
 
-        flunt.hasMaxLen(model.name, 5, 'Nome inválido');
+        flunt.hasMinLen(model.name, 5, 'Nome inválido');
         flunt.isEmail(model.email, 'E-mail inválido');
         flunt.isFixedLen(model.document, 11, 'CPF inválido');
         flunt.hasMinLen(model.document, 6, 'Senha inválida');
