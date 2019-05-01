@@ -65,6 +65,21 @@ export class CustomerController {
         }
     }
 
+    @Post(':document/shipping-address')
+    @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
+    async createShippingAddress(@Param('document') customerDocument: string, @Body() body: Address) {
+        try {
+            const customerWithAddress = await this.customerService.createShippingAddress(customerDocument, body);
+            return new Result('Endereço de entrega salvo com sucesso', true, customerWithAddress.shippingAddress, null);
+        }
+        catch (err) {
+            throw new HttpException(
+                new Result('Não foi possível realizar seu cadastro', false, null, err),
+                HttpStatus.BAD_REQUEST
+            );
+        }
+    }
+
     @Put(':document')
     put(@Param('document') document, @Body() body) {
         return new Result('Cliente alterado com sucesso', true, body, null);

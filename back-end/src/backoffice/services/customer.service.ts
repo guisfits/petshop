@@ -28,4 +28,20 @@ export class CustomerService {
             }
         );
     }
+
+    async createShippingAddress(document: string, data: Address): Promise<Customer> {
+        return await this.model.findOneAndUpdate(
+            {
+                document
+            },
+            {
+                $set: {
+                    shippingAddress: data
+                }
+            },
+            {
+                upsert: true
+            }
+        );
+    }
 }
