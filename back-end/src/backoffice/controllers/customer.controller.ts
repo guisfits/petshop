@@ -1,5 +1,5 @@
-import { Address } from './../models/address.model';
-import { CreateAddressContract } from './../contracts/customer/create-address.contract';
+import { QueryContract } from './../contracts/customer/query.contract';
+import { QueryDto } from './../dtos/query.dto';
 import { HttpStatus } from '@nestjs/common';
 import { AccountService } from './../services/account.service';
 import { CreateCustomerContract } from '../contracts/customer/create-customer.contract';
@@ -16,17 +16,50 @@ export class CustomerController {
 
     constructor(
         private readonly accountService: AccountService,
-        private readonly customerService: CustomerService
+        private readonly customerService: CustomerService,
     ) { }
 
     @Get()
-    getAll() {
-        return new Result(null, true, [], null);
+    async findAll() {
+        try {
+            const customers = await this.customerService.findAll();
+            return new Result(null, true, customers, null);
+        }
+        catch (err) {
+            throw new HttpException(
+                new Result('Não foi possível listar os clientes', false, null, err),
+                HttpStatus.BAD_REQUEST
+            );
+        }
     }
 
     @Get(':document')
-    getById(@Param('document') document) {
-        return new Result(null, true, {}, null);
+    async findByDocument(@Param('document') document) {
+        try {
+            const customer = await this.customerService.findByDocument(document);
+            return new Result(null, true, customer, null);
+        }
+        catch (err) {
+            throw new HttpException(
+                new Result('Não foi possível listar os clientes', false, null, err),
+                HttpStatus.BAD_REQUEST
+            );
+        }
+    }
+
+    @Post('query')
+    @UseInterceptors(new ValidatorInterceptor(new QueryContract()))
+    async query(@Body() model: QueryDto) {
+        try {
+            const customer = await this.customerService.query(model);
+            return new Result(null, true, customer, null);
+        }
+        catch (err) {
+            throw new HttpException(
+                new Result('Não foi possível listar os clientes', false, null, err),
+                HttpStatus.BAD_REQUEST
+            );
+        }
     }
 
     @Post()
@@ -48,45 +81,5 @@ export class CustomerController {
                 HttpStatus.BAD_REQUEST
             );
         }
-    }
-
-    @Post(':document/billing-address')
-    @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
-    async createBillingAddress(@Param('document') customerDocument: string, @Body() body: Address) {
-        try {
-            const customerWithAddress = await this.customerService.createBillingAddress(customerDocument, body);
-            return new Result('Endereço de entrega salvo com sucesso', true, customerWithAddress.billingAddress, null);
-        }
-        catch (err) {
-            throw new HttpException(
-                new Result('Não foi possível realizar seu cadastro', false, null, err),
-                HttpStatus.BAD_REQUEST
-            );
-        }
-    }
-
-    @Post(':document/shipping-address')
-    @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
-    async createShippingAddress(@Param('document') customerDocument: string, @Body() body: Address) {
-        try {
-            const customerWithAddress = await this.customerService.createShippingAddress(customerDocument, body);
-            return new Result('Endereço de entrega salvo com sucesso', true, customerWithAddress.shippingAddress, null);
-        }
-        catch (err) {
-            throw new HttpException(
-                new Result('Não foi possível realizar seu cadastro', false, null, err),
-                HttpStatus.BAD_REQUEST
-            );
-        }
-    }
-
-    @Put(':document')
-    put(@Param('document') document, @Body() body) {
-        return new Result('Cliente alterado com sucesso', true, body, null);
-    }
-
-    @Delete(':document')
-    delete(@Param('document') document) {
-        return new Result('Cliente excluido com sucesso', true, null, null);
     }
 }

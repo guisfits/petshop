@@ -1,4 +1,4 @@
-import { Address } from './../../models/address.model';
+import { Address } from '../../models/address.model';
 import { Flunt } from '../../../core/flunt';
 import { Contract } from '../../../core/contract';
 import { Injectable } from '@nestjs/common';
