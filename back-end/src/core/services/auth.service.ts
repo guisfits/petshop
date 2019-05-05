@@ -11,7 +11,13 @@ export class AuthService {
     ) {}
 
     async createToken() {
-        const user: JwtPayload = { username: 'test@email.com'};
+        const user: JwtPayload = { 
+            email: 'user@email.com',
+            document: "12345678900",
+            image: "assets/image/user.png",
+            roles: ['admin']
+        };
+
         const accessToken = this.jwtService.sign(user);
 
         return {
@@ -21,6 +27,7 @@ export class AuthService {
     }
 
     async validateUser(payload: JwtPayload): Promise<any> {
-        return await this.accountService.findOnebyUsername(payload.username);
+        return payload;
+        // return await this.accountService.findOnebyUsername(payload.document);
     }
 }
