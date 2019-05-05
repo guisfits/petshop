@@ -3,7 +3,7 @@ import { ProductService } from './../services/product.service';
 import { OrderItemService } from './../services/order-item.service';
 import { OrderService } from './../services/order.service';
 import { Controller, Get, Param, HttpStatus, HttpException, Post, Body } from "@nestjs/common";
-import { Result } from 'src/core/result.model';
+import { Result } from 'src/core/models/result.model';
 import { OrderItemDto } from '../dtos/order-item.dto';
 import { Order } from '../entities/order.entity';
 import { OrderItem } from '../entities/order-item.entity';

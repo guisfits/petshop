@@ -1,6 +1,6 @@
 import { Pet } from "src/backoffice/models/pet.model";
-import { Contract } from "src/core/contract";
-import { Flunt } from "src/core/flunt";
+import { Contract } from "src/core/interfaces/contract.interface";
+import { Flunt } from "src/core/utils/flunt";
 
 export class CreatePetConstract implements Contract {
     errors: any[];

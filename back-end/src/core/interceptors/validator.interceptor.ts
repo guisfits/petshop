@@ -1,7 +1,7 @@
 import { NestInterceptor, Injectable, ExecutionContext, CallHandler, HttpException, HttpStatus } from "@nestjs/common";
 import { Observable } from "rxjs";
-import { Contract } from "./contract";
-import { Result } from "./result.model";
+import { Contract } from "../interfaces/contract.interface";
+import { Result } from "../models/result.model";
 
 @Injectable()
 export class ValidatorInterceptor implements NestInterceptor {

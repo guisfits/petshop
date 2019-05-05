@@ -1,5 +1,5 @@
-import { Flunt } from '../../../core/flunt';
-import { Contract } from '../../../core/contract';
+import { Flunt } from '../../../core/utils/flunt';
+import { Contract } from '../../../core/interfaces/contract.interface';
 import { Injectable } from '@nestjs/common';
 import { UpdateCustomerDto } from 'src/backoffice/dtos/customers/update-customer.dto';
 

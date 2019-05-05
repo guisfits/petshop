@@ -1,6 +1,6 @@
 import { ProductService } from './../services/product.service';
 import { Controller, Get, HttpException, HttpStatus, Post, Body, Put, Param, Delete } from "@nestjs/common";
-import { Result } from 'src/core/result.model';
+import { Result } from 'src/core/models/result.model';
 import { Product } from '../entities/product.entity';
 
 @Controller("v1/products")

@@ -1,8 +1,8 @@
 import { CreatePetConstract } from '../contracts/pet/create-pet.contract';
 import { HttpStatus } from '@nestjs/common';
-import { ValidatorInterceptor } from './../../core/validator.interceptor';
+import { ValidatorInterceptor } from '../../core/interceptors/validator.interceptor';
 import { Controller, Post, Put, Param, Body, UseInterceptors, HttpException } from '@nestjs/common';
-import { Result } from 'src/core/result.model';
+import { Result } from 'src/core/models/result.model';
 import { Pet } from '../models/pet.model';
 import { PetService } from '../services/pet.service';
 

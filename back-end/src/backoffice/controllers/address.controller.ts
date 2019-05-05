@@ -1,9 +1,9 @@
 import { Address } from './../models/address.model';
 import { CreateAddressContract } from '../contracts/address/create-address.contract';
 import { HttpStatus } from '@nestjs/common';
-import { ValidatorInterceptor } from './../../core/validator.interceptor';
+import { ValidatorInterceptor } from '../../core/interceptors/validator.interceptor';
 import { Controller, Post, Param, Body, UseInterceptors, HttpException } from '@nestjs/common';
-import { Result } from 'src/core/result.model';
+import { Result } from 'src/core/models/result.model';
 import { AddressService } from '../services/address.service';
 import { AddressType } from '../enums/address-type.enum';
 
