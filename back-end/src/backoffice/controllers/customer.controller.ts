@@ -69,7 +69,7 @@ export class CustomerController {
     async create(@Body() body: CreateCustomerDto) {
         try {
             const userCreated = await this.accountService.create(
-                new User(body.document, body.password, true)
+                new User(body.document, body.password, true, ['user'])
             );
             const customer = await this.customerService.create(
                 new Customer(body.name, body.document, body.email, null, null, null, null, userCreated)
