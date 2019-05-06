@@ -2,7 +2,7 @@ import { UpdateCustomerContract } from './../contracts/customer/update-customer.
 import { UpdateCustomerDto } from './../dtos/customers/update-customer.dto';
 import { QueryContract } from './../contracts/customer/query.contract';
 import { QueryDto } from '../dtos/customers/query.dto';
-import { HttpStatus } from '@nestjs/common';
+import { HttpStatus, CacheInterceptor } from '@nestjs/common';
 import { AccountService } from './../services/account.service';
 import { CreateCustomerContract } from '../contracts/customer/create-customer.contract';
 import { ValidatorInterceptor } from '../../core/interceptors/validator.interceptor';
@@ -22,6 +22,7 @@ export class CustomerController {
     ) { }
 
     @Get()
+    @UseInterceptors(CacheInterceptor)
     async findAll() {
         try {
             const customers = await this.customerService.findAll();

@@ -8,7 +8,7 @@ import { CustomerSchema } from './schemas/customer.schema';
 import { CustomerService } from './services/customer.service';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './../core/strategies/jwt.strategy';
-import { Module } from '@nestjs/common';
+import { Module, CacheModule, HttpModule } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { PetController } from './controllers/pet.controller';
@@ -17,6 +17,8 @@ import { UserSchema } from './schemas/user.schema';
 
 @Module({
   imports: [
+    HttpModule,
+    CacheModule.register(),
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secretOrPrivateKey: 'secretKey',
