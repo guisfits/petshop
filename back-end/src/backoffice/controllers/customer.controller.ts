@@ -68,14 +68,12 @@ export class CustomerController {
     @UseInterceptors(new ValidatorInterceptor(new CreateCustomerContract()))
     async create(@Body() body: CreateCustomerDto) {
         try {
-            const userCreated = await this.accountService.create(
-                new User(body.document, body.password, true, ['user'])
-            );
-            const customer = await this.customerService.create(
-                new Customer(body.name, body.document, body.email, null, null, null, null, userCreated)
-            );
+            const user = new User(body.document, body.password, false, ['user']);
+            const userCreated = await this.accountService.create(user);
+            const customer = new Customer(body.name, body.document, body.email, null, null, null, null, userCreated);
+            const customerCreated = await this.customerService.create(customer);
 
-            return new Result(null, true, customer, null);
+            return new Result(null, true, customerCreated, null);
         }
         catch (err) {
             throw new HttpException(

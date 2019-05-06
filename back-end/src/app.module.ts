@@ -6,7 +6,7 @@ import { TypeOrmModule } from  '@nestjs/typeorm';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017'),
+    MongooseModule.forRoot(process.env.CONNECTION_STRING),
     TypeOrmModule.forRoot({
       type: 'mssql',
       host: '127.0.0.1',
