@@ -6,9 +6,7 @@ import { CommandBus } from "@nestjs/cqrs";
 export class RoomBookBus {
     constructor(private readonly commandBus: CommandBus) {}
 
-    async Book(customerId: string, roomId: string) {
-        return await this.commandBus.execute(
-            new BookRoomCommand(customerId, roomId)
-        );
+    async Book(command: BookRoomCommand) {
+        return await this.commandBus.execute(command);
     }
 }

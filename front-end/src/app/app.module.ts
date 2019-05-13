@@ -15,6 +15,7 @@ import { ProductsPageComponent } from "./pages/store/products-page/products-page
 import { CartPageComponent } from "./pages/store/cart-page/cart-page.component";
 import { ProductCartComponent } from './components/store/product-cart/product-cart.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
+import { MaskDirective } from './directives/mask.directive';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { LoadingComponent } from './components/shared/loading/loading.component'
     CartPageComponent,
     FramePageComponent,
     ProductCartComponent,
-    LoadingComponent
+    LoadingComponent,
+    MaskDirective
   ],
   imports: [
     BrowserModule,

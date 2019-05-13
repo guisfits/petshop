@@ -3,7 +3,11 @@ import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class RoomService {
-    async findOneById(id: string): Promise<Room> {
-        return new Room("1234567");
+    async checkAvaiability(id: string, date: Date): Promise<Room> {
+        return new Room("123456");
+    }
+
+    async book(room: Room){
+        
     }
 }
