@@ -8,6 +8,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ResetPasswordPageComponent } from './pages/account/reset-password-page/reset-password-page.component';
 import { AuthService } from './services/auth.service';
+import { ProfilePageComponent } from './pages/account/profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,12 @@ const routes: Routes = [
         path: "cart",
         component: CartPageComponent,
         canActivate: [AuthService],
-      }
+      },
+      // {
+      //   path: "checkout",
+      //   component: CartPageComponent,
+      //   canActivate: [AuthService],
+      // }
     ]
   },
   {
@@ -34,6 +40,10 @@ const routes: Routes = [
     component: FramePageComponent,
     canActivate: [AuthService],
     children: [
+      {
+        path: "",
+        component: ProfilePageComponent,
+      },
       {
         path: "pets",
         component: PetsPageComponent,

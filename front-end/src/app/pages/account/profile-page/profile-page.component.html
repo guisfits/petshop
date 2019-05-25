@@ -1,0 +1,52 @@
+<div class="uk-flex-center" uk-grid>
+    <div class="uk-width-1-3@m">
+      <app-loading *ngIf="busy"></app-loading>
+
+      <form [formGroup]="form" *ngIf="!busy">
+        <div class="uk-card uk-card-primary uk-card-body uk-box-shadow-small">
+          <h3 class="uk-card-title">Cadastre-se</h3>
+          <div class="uk-margin">
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Nome"
+              class="uk-input uk-form-large"
+              [ngClass]="{
+                'uk-form-danger':
+                  !form.controls.name.valid && form.controls.name.dirty
+              }"
+            />
+          </div>
+          <div class="uk-margin">
+            <input
+              type="text"
+              class="uk-input uk-form-large"
+              formControlName="document"
+              />
+          </div>
+          <div class="uk-margin">
+            <input
+              type="email"
+              class="uk-input uk-form-large"
+              placeholder="E-mail"
+              formControlName="email"
+              [ngClass]="{'uk-form-danger': (!form.controls.email.valid && form.controls.email.dirty) }"
+            />
+          </div>
+          <div class="uk-margin uk-text-right">
+            <button
+              (click)="submit()"
+              [disabled]="form.invalid"
+              class="uk-button uk-button-default">
+              Atualizar
+          </button>
+          </div>
+        </div>
+      </form>
+      <p class="uk-text-center">
+        <a [routerLink]="['/login']" class="uk-button uk-button-link">
+          Cancelar
+        </a>
+      </p>
+    </div>
+  </div>
