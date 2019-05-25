@@ -22,6 +22,10 @@ export class DataService {
     return this.http.get<ProductModel[]>(`${this.url}/products`);
   }
 
+  create(data) {
+    return this.http.post(`${this.url}/accounts`, data);
+  }
+
   authenticate(data) {
     return this.http.post<ProductModel[]>(`${this.url}/accounts/authenticate`, data);
   }
