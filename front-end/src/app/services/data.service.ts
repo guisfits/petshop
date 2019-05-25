@@ -37,4 +37,8 @@ export class DataService {
       { headers: this.composeHeader() }
     );
   }
+
+  resetPassword(data) {
+    return this.http.post(`${this.url}/accounts/reset-password`, data);
+  }
 }
