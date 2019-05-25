@@ -3,6 +3,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { HttpClientModule } from "@angular/common/http";
 import { ReactiveFormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -36,9 +38,11 @@ import { DataService } from './services/data.service';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    ReactiveFormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    AppRoutingModule,
   ],
   providers: [
     AuthService,
