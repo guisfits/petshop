@@ -18,6 +18,10 @@ export class CartPageComponent implements OnInit {
     this.loadCart();
   }
 
+  public hasItems(): boolean {
+    return this.cart.items.length > 0;
+  }
+
   public loadCart() {
     this.cart = CartUtil.get();
   }
