@@ -7,6 +7,7 @@ import { FramePageComponent } from "./pages/master/frame.page";
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { ResetPasswordPageComponent } from './pages/account/reset-password-page/reset-password-page.component';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
   {
@@ -23,17 +24,19 @@ const routes: Routes = [
       },
       {
         path: "cart",
-        component: CartPageComponent
+        component: CartPageComponent,
+        canActivate: [AuthService],
       }
     ]
   },
   {
     path: "account",
     component: FramePageComponent,
+    canActivate: [AuthService],
     children: [
       {
         path: "pets",
-        component: PetsPageComponent
+        component: PetsPageComponent,
       }
     ]
   },

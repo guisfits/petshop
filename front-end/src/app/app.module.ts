@@ -16,6 +16,8 @@ import { CartPageComponent } from "./pages/store/cart-page/cart-page.component";
 import { ProductCartComponent } from './components/store/product-cart/product-cart.component';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { MaskDirective } from './directives/mask.directive';
+import { AuthService } from './services/auth.service';
+import { DataService } from './services/data.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import { MaskDirective } from './directives/mask.directive';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    DataService
+  ],
   bootstrap: [
     AppComponent
   ]
