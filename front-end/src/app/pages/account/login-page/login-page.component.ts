@@ -2,7 +2,7 @@ import { CustomValidator } from './../../../validators/custom.validator';
 import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Secutiry } from 'src/app/utils/security.util';
+import { Security } from 'src/app/utils/security.util';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    const token = Secutiry.getToken();
+    const token = Security.getToken();
     if (token) {
       this.busy = true;
       this.service.refreshToken().subscribe(
@@ -56,7 +56,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   setUser(user, token) {
-    Secutiry.set(user, token);
+    Security.set(user, token);
     this.router.navigate(["/"]);
   }
 

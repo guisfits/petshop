@@ -31,10 +31,11 @@
                 class="uk-icon uk-margin-small-right"
                 uk-icon="icon: user"
               ></span>
+              {{ user?.name }}
             </a>
           </li>
           <li>
-            <a href="">
+            <a (click)="logout()">
               <span
                 class="uk-icon uk-margin-small-right"
                 uk-icon="icon: sign-out"

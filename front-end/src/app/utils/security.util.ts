@@ -3,7 +3,7 @@ import { User } from "../models/user.model";
 const PETSHOP_USER = "petshop.user";
 const PETSHOP_TOKEN = "petshop.token";
 
-export class Secutiry {
+export class Security {
   public static set(user: User, token: string) {
     const data = JSON.stringify(user);
 
