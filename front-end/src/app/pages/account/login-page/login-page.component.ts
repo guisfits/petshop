@@ -1,6 +1,9 @@
+import { CustomValidator } from './../../../validators/custom.validator';
 import { DataService } from './../../../services/data.service';
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Secutiry } from 'src/app/utils/security.util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-login-page",
@@ -13,11 +16,27 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private service: DataService,
-    private formBuilder: FormBuilder) { }
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) {
+    this.configureFormGroup();
+  }
 
   ngOnInit() {
-    this.configureFormGroup();
-    this.refreshTokenIfExists();
+    const token = Secutiry.getToken();
+    if (token) {
+      this.busy = true;
+      this.service.refreshToken().subscribe(
+        (data: any) => {
+          this.busy = false;
+          this.setUser(data.customer, data.token);
+        },
+        (err) => {
+          localStorage.clear();
+          this.busy = false;
+        }
+      );
+    }
   }
 
   submit() {
@@ -26,11 +45,19 @@ export class LoginPageComponent implements OnInit {
       .authenticate(this.form.value)
       .subscribe(
         (data: any) => {
-          localStorage.setItem("petshop.token", data.token);
           this.busy = false;
+          this.setUser(data.customer, data.token);
         },
-        (err) => console.error(err)
+        (err) => {
+          console.error(err);
+          this.busy = false;
+        }
       );
+  }
+
+  setUser(user, token) {
+    Secutiry.set(user, token);
+    this.router.navigate(["/"]);
   }
 
   private configureFormGroup() {
@@ -39,6 +66,7 @@ export class LoginPageComponent implements OnInit {
         Validators.minLength(14),
         Validators.maxLength(14),
         Validators.required,
+        CustomValidator.isCpf()
       ])],
       password: ['', Validators.compose([
         Validators.minLength(6),
@@ -46,17 +74,5 @@ export class LoginPageComponent implements OnInit {
         Validators.required
       ])]
     });
-  }
-
-  private refreshTokenIfExists() {
-    const token = localStorage.getItem("petshop.token");
-    if (token) {
-      this.service
-        .refreshToken()
-        .subscribe(
-          (data: any) => localStorage.setItem("petshop.token", data.token),
-          (err) => localStorage.clear()
-        );
-    }
   }
 }
