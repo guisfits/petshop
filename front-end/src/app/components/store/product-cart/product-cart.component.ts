@@ -26,7 +26,7 @@ export class ProductCartComponent {
       this.product.title,
       1,
       this.product.price,
-      this.product.images
+      this.product.images[0]
     );
 
     this.toastr.success(`${this.product.title} adicionado ao carrinho`, 'Produto Adicionado');

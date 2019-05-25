@@ -4,6 +4,6 @@ export class CartItem {
     public product: string,
     public quantity: number,
     public price: number,
-    public images: string[] = [],
+    public image: string,
   ) { }
 }

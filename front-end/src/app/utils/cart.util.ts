@@ -14,9 +14,9 @@ export class CartUtil {
     return JSON.parse(data);
   }
 
-  public static add(id: string, product: string, quantity: number, price: number, images: string[]) {
+  public static add(id: string, product: string, quantity: number, price: number, image: string) {
     const cart = this.get();
-    const item = new CartItem(id, product, quantity, price, images);
+    const item = new CartItem(id, product, quantity, price, image);
     cart.items.push(item);
     localStorage.setItem(PETSHOP_CART, JSON.stringify(cart));
   }
